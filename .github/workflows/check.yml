@@ -1,8 +1,8 @@
 name: Verificar punto Iberdrola
 
 on:
-  schedule:
-    - cron: '*/1 * * * *'  # Cada 1 minutos
+# schedule:
+#  - cron: '*/1 * * * *'  # Cada 1 minutos
   workflow_dispatch:        # Para lanzarlo manualmente
 
 jobs:
