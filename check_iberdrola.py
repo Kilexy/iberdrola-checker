@@ -12,11 +12,11 @@ def notificar_telegram(mensaje):
     try:
         response = requests.post(url, json=payload)
         if response.status_code == 200:
-            print("✅ Notificado por Telegram")
+            print("✅ Notificado por Telegram", flush=True)
         else:
-            print("❌ Error en notificación:", response.text)
+            print("❌ Error en notificación:", response.text, flush=True)
     except Exception as e:
-        print("❌ Excepción en Telegram:", e)
+        print("❌ Excepción en Telegram:", e, flush=True)
 
 def consultar_punto():
     url = "https://www.iberdrola.es/o/webclipb/iberdrola/puntosrecargacontroller/getListarPuntosRecarga"
@@ -37,7 +37,10 @@ def consultar_punto():
             "advantageous": False,
             "connectorsType": [],
             "loadSpeed": [],
-            "latitudeMax":38.47133335593224,"latitudeMin":38.47070336704179,"longitudeMax":-0.7981991849749259,"longitudeMin":-0.7993216894476585
+            "latitudeMax":38.47133335593224,
+            "latitudeMin":38.47070336704179,
+            "longitudeMax":-0.7981991849749259,
+            "longitudeMin":-0.7993216894476585
         },
         "language": "es"
     }
@@ -52,27 +55,33 @@ def consultar_punto():
             ]
             return disponibles
         else:
-            print("❌ Error HTTP:", response.status_code)
+            print("❌ Error HTTP:", response.status_code, flush=True)
             return []
     except Exception as e:
-        print("❌ Excepción al consultar:", e)
+        print("❌ Excepción al consultar:", e, flush=True)
         return []
 
 # MAIN LOOP
 notificado = False
 tiempo_espera = 5  # segundos
-ciclos = 120  # duración total = ciclos * tiempo_espera (10 minutos aprox)
+ciclos = 5         # para pruebas rápidas
 
-print("🚀 Iniciando verificación de disponibilidad...")
+print("🚀 Iniciando verificación de disponibilidad...", flush=True)
 for i in range(ciclos):
+    print(f"🔄 Ciclo {i+1}/{ciclos}", flush=True)
     puntos = consultar_punto()
+    print(f"📊 Puntos disponibles: {len(puntos)}", flush=True)
+
     if puntos and not notificado:
         mensaje = f"⚡ Punto disponible: {puntos[0]['locationData']['cuprName']}"
         notificar_telegram(mensaje)
         notificado = True
     elif not puntos:
         notificado = False  # Reiniciar si se vuelve a ocupar
-        print(f"🔄 Ciclo {i+1}/{ciclos} | Puntos disponibles: {len(puntos)}")
+    else:
+        print("ℹ️ Ya se notificó disponibilidad.", flush=True)
+
     time.sleep(tiempo_espera)
 
-print("⏹️ Finalizado")
+print("⏹️ Finalizado", flush=True)
+
