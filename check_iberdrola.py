@@ -72,6 +72,7 @@ for i in range(ciclos):
         notificado = True
     elif not puntos:
         notificado = False  # Reiniciar si se vuelve a ocupar
+        print(f"🔄 Ciclo {i+1}/{ciclos} | Puntos disponibles: {len(puntos)}")
     time.sleep(tiempo_espera)
 
 print("⏹️ Finalizado")
