@@ -12,7 +12,7 @@ PAYLOAD = {
 
 def check_port():
     try:
-        response = requests.post(URL, json=PAYLOAD, headers=HEADERS)
+        response = requests.post(URL, json=PAYLOAD, headers=HEADERS, timeout=10)
         data = response.json()
         conectores = data["listaConectores"]
 
