@@ -29,5 +29,5 @@ def check_port():
         print(f"Error al consultar el punto de carga: {e}")
         return False
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     check_port()
