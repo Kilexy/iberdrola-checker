@@ -1,34 +1,45 @@
 import requests
+import json
 
-PUNTO_ID = 97896
-URL = "https://www.iberdrola.es/o/webclipb/iberdrola/puntosrecargacontroller/getDatosPuntoRecarga"
-HEADERS = {
-    'Content-Type': 'application/json',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+# Coordenadas de tu zona (ajusta si hace falta)
+payload = {
+  "dto": {
+    "chargePointTypesCodes": ["P", "R", "I", "N"],
+    "socketStatus": [],
+    "advantageous": False,
+    "connectorsType": [],
+    "loadSpeed": [],
+    "latitudeMax": 38.4716227,
+    "latitudeMin": 38.4703627,
+    "longitudeMax": -0.7982563,
+    "longitudeMin": -0.7996698
+  },
+  "language": "es"
 }
-PAYLOAD = {
-    "dto": {"cuprId": [PUNTO_ID]},
-    "language": "es"
+
+headers = {
+    "Content-Type": "application/json",
+    "User-Agent": "Mozilla/5.0"
 }
 
-def check_port():
-    try:
-        response = requests.post(URL, json=PAYLOAD, headers=HEADERS, timeout=30)
-        data = response.json()
-        conectores = data["listaConectores"]
+url = "https://www.iberdrola.es/o/webclipb/iberdrola/puntosrecargacontroller/getListarPuntosRecarga"
 
-        for conector in conectores:
-            estado = conector.get("estadoConector", "").lower()
-            if "libre" in estado:
-                print("¡Hay un conector LIBRE!")
-                return True
+try:
+    print("Enviando petición a Iberdrola...")
+    response = requests.post(url, headers=headers, data=json.dumps(payload), timeout=10)
+    response.raise_for_status()
+    data = response.json()
 
-        print("No hay conectores libres. Seguimos comprobando...")
-        return False
+    disponibles = [p for p in data.get("lstPuntoRecarga", []) if p.get("statusCode") == "AVAILABLE"]
 
-    except Exception as e:
-        print(f"Error al consultar el punto de carga: {e}")
-        return False
+    if disponibles:
+        print(f"¡Hay {len(disponibles)} puntos disponibles!")
+        for p in disponibles:
+            print(f"- {p['address']} ({p['name']})")
+    else:
+        print("No hay puntos disponibles por ahora.")
 
-if __name__ == "__main__":
-    check_port()
+except Exception as e:
+    print(f"Error al consultar el punto de carga: {e}")
+
+
