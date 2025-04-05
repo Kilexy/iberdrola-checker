@@ -37,10 +37,7 @@ def consultar_punto():
             "advantageous": False,
             "connectorsType": [],
             "loadSpeed": [],
-            "latitudeMax": 38.472,
-            "latitudeMin": 38.470,
-            "longitudeMax": -0.798,
-            "longitudeMin": -0.801
+            "latitudeMax":38.47133335593224,"latitudeMin":38.47070336704179,"longitudeMax":-0.7981991849749259,"longitudeMin":-0.7993216894476585
         },
         "language": "es"
     }
