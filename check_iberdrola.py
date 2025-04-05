@@ -18,9 +18,14 @@ payload = {
 }
 
 headers = {
-    "Content-Type": "application/json",
-    "User-Agent": "Mozilla/5.0"
+    "Content-Type": "application/json; charset=UTF-8",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+    "Accept": "application/json, text/javascript, */*; q=0.01",
+    "Origin": "https://www.iberdrola.es",
+    "Referer": "https://www.iberdrola.es/movilidad-electrica/puntos-de-recarga",
+    "X-Requested-With": "XMLHttpRequest"
 }
+
 
 url = "https://www.iberdrola.es/o/webclipb/iberdrola/puntosrecargacontroller/getListarPuntosRecarga"
 
