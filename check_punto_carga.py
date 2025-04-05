@@ -3,9 +3,9 @@ import requests
 from bs4 import BeautifulSoup
 
 # CONFIGURA AQUÍ:
-URL = "TU_URL_DEL_PUNTO_DE_CARGA"
-BOT_TOKEN = "TU_TOKEN_TELEGRAM"
-CHAT_ID = "TU_CHAT_ID_TELEGRAM"
+URL = "https://www.iberdrola.es/o/webclipb/iberdrola/puntosrecargacontroller/getDatosPuntoRecarga"
+BOT_TOKEN = "8102593995:AAExuxIBZmPtuIOjBZqjT10KitpSKh-7RI8"
+CHAT_ID = "6275686013"
 
 def obtener_estado_cargador():
     response = requests.get(URL, headers={"User-Agent": "Mozilla/5.0"})
