@@ -9,10 +9,14 @@ payload = {
     "advantageous": False,
     "connectorsType": [],
     "loadSpeed": [],
-    "latitudeMax": 38.4716227,
-    "latitudeMin": 38.4703627,
-    "longitudeMax": -0.7982563,
-    "longitudeMin": -0.7996698
+ #   "latitudeMax": 38.4716227,
+ #   "latitudeMin": 38.4703627,
+ #   "longitudeMax": -0.7982563,
+ #   "longitudeMin": -0.7996698
+    "latitudeMax":38.47186625660738,
+    "latitudeMin":38.47018628641727,
+    "longitudeMax":-0.799357454367684,
+    "longitudeMin":-0.8010847969732748
   },
   "language": "es"
 }
