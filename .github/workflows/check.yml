@@ -1,7 +1,7 @@
 name: Verificar punto Iberdrola
 
 on:
-  workflow_dispatch:  # Solo manual
+  workflow_dispatch:  # Manual
 
 jobs:
   verificar:
