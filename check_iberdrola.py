@@ -12,14 +12,15 @@ payload = {
         "advantageous": False,
         "connectorsType": [],
         "loadSpeed": [],
-          "latitudeMax": 38.4716227,
-         "latitudeMin": 38.4703627,
-         "longitudeMax": -0.7982563,
-         "longitudeMin": -0.7996698
+      #    "latitudeMax": 38.4716227,
+      #   "latitudeMin": 38.4703627,
+      #   "longitudeMax": -0.7982563,
+      #   "longitudeMin": -0.7996698
      # "latitudeMax":38.47186625660738,
      # "latitudeMin":38.47018628641727,
      # "longitudeMax":-0.799357454367684,
      # "longitudeMin":-0.8010847969732748
+        "latitudeMax":38.47580637031306,"latitudeMin":38.47454646519379,"longitudeMax":-0.7700730395413236,"longitudeMin":-0.7723180484867886
 
     },
     "language": "es"
