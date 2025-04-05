@@ -20,7 +20,7 @@ payload = {
      # "latitudeMin":38.47018628641727,
      # "longitudeMax":-0.799357454367684,
      # "longitudeMin":-0.8010847969732748
-        "latitudeMax":38.438213557477454,"latitudeMin":38.436952995663596,"longitudeMax":-0.8412880519796029,"longitudeMin":-0.843533060925068
+        "latitudeMax":38.49319005249939,"latitudeMin":38.45287189081088,"longitudeMax":-0.766464440422403,"longitudeMin":-0.8383047266772858
 
     },
     "language": "es"
