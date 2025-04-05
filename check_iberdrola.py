@@ -1,26 +1,31 @@
 import requests
 import json
 
-# Coordenadas de tu zona (ajusta si hace falta)
+# URL del endpoint
+url = "https://www.iberdrola.es/o/webclipb/iberdrola/puntosrecargacontroller/getListarPuntosRecarga"
+
+# Payload con coordenadas (ajústalas según la zona que quieras consultar)
 payload = {
-  "dto": {
-    "chargePointTypesCodes": ["P", "R", "I", "N"],
-    "socketStatus": [],
-    "advantageous": False,
-    "connectorsType": [],
-    "loadSpeed": [],
- #   "latitudeMax": 38.4716227,
- #   "latitudeMin": 38.4703627,
- #   "longitudeMax": -0.7982563,
- #   "longitudeMin": -0.7996698
-    "latitudeMax":38.47186625660738,
-    "latitudeMin":38.47018628641727,
-    "longitudeMax":-0.799357454367684,
-    "longitudeMin":-0.8010847969732748
-  },
-  "language": "es"
+    "dto": {
+        "chargePointTypesCodes": ["P", "R", "I", "N"],
+        "socketStatus": [],
+        "advantageous": False,
+        "connectorsType": [],
+        "loadSpeed": [],
+       #   "latitudeMax": 38.4716227,
+      #   "latitudeMin": 38.4703627,
+      #   "longitudeMax": -0.7982563,
+      #   "longitudeMin": -0.7996698
+      "latitudeMax":38.47186625660738,
+      "latitudeMin":38.47018628641727,
+      "longitudeMax":-0.799357454367684,
+      "longitudeMin":-0.8010847969732748
+
+    },
+    "language": "es"
 }
 
+# Encabezados requeridos por Iberdrola
 headers = {
     "Content-Type": "application/json; charset=UTF-8",
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
@@ -30,25 +35,28 @@ headers = {
     "X-Requested-With": "XMLHttpRequest"
 }
 
-
-url = "https://www.iberdrola.es/o/webclipb/iberdrola/puntosrecargacontroller/getListarPuntosRecarga"
+print("Enviando petición a Iberdrola...")
 
 try:
-    print("Enviando petición a Iberdrola...")
-    response = requests.post(url, headers=headers, data=json.dumps(payload), timeout=10)
+    response = requests.post(url, headers=headers, data=json.dumps(payload), timeout=15)
     response.raise_for_status()
     data = response.json()
 
-    disponibles = [p for p in data.get("lstPuntoRecarga", []) if p.get("statusCode") == "AVAILABLE"]
+    puntos_disponibles = []
 
-    if disponibles:
-        print(f"¡Hay {len(disponibles)} puntos disponibles!")
-        for p in disponibles:
-            print(f"- {p['address']} ({p['name']})")
+    for punto in data.get("entidad", []):
+        status = punto.get("cpStatus", {}).get("statusCode")
+        if status == "AVAILABLE":
+            direccion = punto["locationData"]["supplyPointData"]["cpAddress"]
+            puntos_disponibles.append(f"{direccion.get('streetName')} {direccion.get('streetNum')}, {direccion.get('townName')}")
+
+    if puntos_disponibles:
+        print("⚡ Puntos de carga disponibles:")
+        for d in puntos_disponibles:
+            print(f" - {d}")
     else:
-        print("No hay puntos disponibles por ahora.")
+        print("❌ No hay puntos disponibles por ahora.")
 
 except Exception as e:
-    print(f"Error al consultar el punto de carga: {e}")
-
+    print("Error al consultar el punto de carga:", e)
 
