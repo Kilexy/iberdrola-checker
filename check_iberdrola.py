@@ -11,6 +11,14 @@ sys.stdout.reconfigure(line_buffering=True)
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
+def esta_activo():
+    try:
+        with open("estado.txt", "r") as f:
+            estado = f.read().strip().lower()
+            return estado == "activo"
+    except FileNotFoundError:
+        return False
+
 def notificar_telegram(mensaje):
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {"chat_id": TELEGRAM_CHAT_ID, "text": mensaje}
@@ -22,6 +30,11 @@ def notificar_telegram(mensaje):
             print("❌ Error en notificación:", response.text)
     except Exception as e:
         print("❌ Excepción en Telegram:", e)
+
+if not esta_activo():
+    print("🛑 Monitorización desactivada. No se realiza búsqueda.")
+    exit()
+
 
 def consultar_punto():
     url = "https://www.iberdrola.es/o/webclipb/iberdrola/puntosrecargacontroller/getListarPuntosRecarga"
