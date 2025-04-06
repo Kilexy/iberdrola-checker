@@ -55,11 +55,11 @@ def consultar_punto():
             "advantageous": False,
             "connectorsType": [],
             "loadSpeed": [],
-           # "latitudeMax": 38.47133335593224,
-           # "latitudeMin": 38.47070336704179,
-           # "longitudeMax": -0.7981991849749259,
-           # "longitudeMin": -0.7993216894476585
-            "latitudeMax":38.493634489628164,"latitudeMin":38.4533165765376,"longitudeMax":-0.7698327166954999,"longitudeMin":-0.8416730029503827
+            "latitudeMax": 38.47133335593224,
+            "latitudeMin": 38.47070336704179,
+            "longitudeMax": -0.7981991849749259,
+            "longitudeMin": -0.7993216894476585
+           # "latitudeMax":38.493634489628164,"latitudeMin":38.4533165765376,"longitudeMax":-0.7698327166954999,"longitudeMin":-0.8416730029503827
         },
         "language": "es"
     }
