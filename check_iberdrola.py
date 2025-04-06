@@ -62,20 +62,23 @@ def consultar_punto():
 
 # MAIN LOOP
 notificado = False
-tiempo_espera = 5
-ciclos = 5  # cambia a más si quieres más duración
+tiempo_espera = 5  # segundos
+ciclos = 60  # Ejecutar durante 5 minutos (60 ciclos de 5s)
 
 print("🚀 Iniciando verificación de disponibilidad...")
 for i in range(ciclos):
-    print(f"🔄 Ciclo {i+1}/{ciclos}")
+    print(f"🔄 Ciclo {i+1}/{ciclos} - esperando {tiempo_espera}s...")
+
     puntos = consultar_punto()
     print(f"📊 Puntos disponibles: {len(puntos)}")
+
     if puntos and not notificado:
         mensaje = f"⚡ Punto disponible: {puntos[0]['locationData']['cuprName']}"
         notificar_telegram(mensaje)
         notificado = True
     elif not puntos:
-        notificado = False
+        notificado = False  # Reiniciar si se vuelve a ocupar
+
     time.sleep(tiempo_espera)
 
 print("⏹️ Finalizado")
