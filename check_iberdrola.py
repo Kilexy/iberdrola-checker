@@ -13,11 +13,11 @@ def notificar_telegram(mensaje):
     try:
         response = requests.post(url, json=payload, timeout=10)
         if response.status_code == 200:
-            print("✅ Notificado por Telegram")
+            print("✅ Notificado por Telegram", flush=True)
         else:
-            print("❌ Error en notificación:", response.text)
+            print("❌ Error en notificación:", response.text, flush=True)
     except Exception as e:
-        print("❌ Excepción en Telegram:", e)
+        print("❌ Excepción en Telegram:", e, flush=True)
 
 def consultar_punto():
     url = "https://www.iberdrola.es/o/webclipb/iberdrola/puntosrecargacontroller/getListarPuntosRecarga"
@@ -57,7 +57,7 @@ def consultar_punto():
         return disponibles
 
     except Exception as e:
-        print("❌ Excepción al consultar:", e)
+        print("❌ Excepción al consultar:", e, flush=True)
         return []
 
 # MAIN LOOP
@@ -65,12 +65,12 @@ notificado = False
 tiempo_espera = 5  # segundos
 ciclos = 60  # Ejecutar durante 5 minutos (60 ciclos de 5s)
 
-print("🚀 Iniciando verificación de disponibilidad...")
+print("🚀 Iniciando verificación de disponibilidad...", flush=True)
 for i in range(ciclos):
-    print(f"🔄 Ciclo {i+1}/{ciclos} - esperando {tiempo_espera}s...")
+    print(f"🔄 Ciclo {i+1}/{ciclos} - esperando {tiempo_espera}s...", flush=True)
 
     puntos = consultar_punto()
-    print(f"📊 Puntos disponibles: {len(puntos)}")
+    print(f"📊 Puntos disponibles: {len(puntos)}", flush=True)
 
     if puntos and not notificado:
         mensaje = f"⚡ Punto disponible: {puntos[0]['locationData']['cuprName']}"
@@ -81,5 +81,5 @@ for i in range(ciclos):
 
     time.sleep(tiempo_espera)
 
-print("⏹️ Finalizado")
+print("⏹️ Finalizado", flush=True)
 
