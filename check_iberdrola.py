@@ -34,7 +34,7 @@ def notificar_telegram(mensaje):
 if not esta_activo():
     print("🛑 Monitorización desactivada. No se realiza búsqueda.")
     exit()
-
+print("✅ Monitorización activada. Realizando búsqueda...")
 
 def consultar_punto():
     url = "https://www.iberdrola.es/o/webclipb/iberdrola/puntosrecargacontroller/getListarPuntosRecarga"
