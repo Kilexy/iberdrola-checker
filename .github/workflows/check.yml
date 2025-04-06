@@ -25,10 +25,13 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python -u check_iberdrola.py
-      - name: Guardar estado de notificación
-        run: |
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git add .notificado
-          git commit -m "Actualizar estado de notificación" || echo "Sin cambios"
-          git push
+      
+- name: Guardar estado de notificación
+  run: |
+    git config --global user.email "github-actions@github.com"
+    git config --global user.name "GitHub Actions"
+    git add .notificado
+    git commit -m "Actualizar estado de notificación" || echo "Sin cambios"
+    git pull --rebase
+    git push
+
