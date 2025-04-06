@@ -18,7 +18,7 @@ def notificar_telegram(mensaje):
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {"chat_id": TELEGRAM_CHAT_ID, "text": mensaje}
     try:
-        response = requests.post(url, json=payload)
+        response = requests.post(url, headers=headers, data=json.dumps(payload), timeout=10)
         if response.status_code == 200:
             print("✅ Notificado por Telegram", flush=True)
         else:
