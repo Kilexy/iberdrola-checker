@@ -83,7 +83,7 @@ def consultar_punto():
 # 🔁 MAIN LOOP
 notificado = False
 tiempo_espera = 5  # segundos
-ciclos = 120        # total 10 minutos
+ciclos = 110        # total 10 minutos
 
 print("🚀 Iniciando verificación de disponibilidad...")
 for i in range(ciclos):
